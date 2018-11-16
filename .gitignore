@@ -2,3 +2,4 @@
 build/
 .solution.json
 build.gradle
+.keep
