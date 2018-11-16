@@ -1,0 +1,4 @@
+.gradle
+build/
+.solution.json
+build.gradle
