@@ -1,6 +1,6 @@
 package Isogram
 
-fun isIsogram(text: String): Boolean {
-  var letters = text.toLowerCase().filter { it in 'a'..'z' }.toList()
-  return letters.distinct().size == letters.size
-}
+fun isIsogram(text: String): Boolean =
+  text.toLowerCase()
+    .filter(Char::isLetter)
+    .let { it.toSet().size == it.length }
