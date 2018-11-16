@@ -1,16 +1,13 @@
 package Raindrops
 
 fun convert(num: Int): String {
-  val modBy = { n: Int -> num % n == 0 }
-  val modBy3 = modBy(3);
-  val modBy5 = modBy(5);
-  val modBy7 = modBy(7);
-  var output = ""
+  val (modBy3, modBy5, modBy7) = listOf(3, 5, 7).map { num % it == 0 };
+  var sb = StringBuilder()
 
-  if (modBy3) output += "Pling"
-  if (modBy5) output += "Plang"
-  if (modBy7) output += "Plong"
-  if (!modBy3 && !modBy5 && !modBy7) output = num.toString()
+  if (modBy3) sb.append("Pling")
+  if (modBy5) sb.append("Plang")
+  if (modBy7) sb.append("Plong")
+  if (!modBy3 && !modBy5 && !modBy7) sb.append(num)
 
-  return output
+  return sb.toString()
 }
