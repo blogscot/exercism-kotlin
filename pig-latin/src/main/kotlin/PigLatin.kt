@@ -1,6 +1,5 @@
 package PigLatin
 
-
 private fun translateWord(word: String): String {
   val vowels = "aeiouy"
   val firstLetter = word[0]
@@ -24,7 +23,6 @@ private fun translateWord(word: String): String {
 
   return suffix + prefix + "ay"
 }
-
 
 fun translate(text: String): String =
   text.split(" ").map { translateWord(it) }.joinToString(" ")
