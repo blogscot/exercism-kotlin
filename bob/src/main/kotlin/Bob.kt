@@ -1,13 +1,12 @@
 package Bob
 
-fun isShouting(comment: String): Boolean {
-  return comment.any { it.isLetter() } && comment.toUpperCase() == comment
-}
+private fun String.isShouting(): Boolean =
+  this.any { it.isLetter() } && this.toUpperCase() == this
 
 fun hey(text: String): String {
   val letters = text.filter { it.isLetterOrDigit() || it == '?'}
   return when {
-    isShouting(letters) -> "Whoa, chill out!"
+    letters.isShouting() -> "Whoa, chill out!"
     letters.endsWith('?') -> "Sure."
     letters.isBlank() -> "Fine. Be that way!"
     else -> "Whatever."
