@@ -1,6 +1,6 @@
 object BeerSong {
 
-  data class Msgs(
+  class Msgs(
       var how_many: String = "",
       var how_many_second: String = "",
       var instruction: String = "",
