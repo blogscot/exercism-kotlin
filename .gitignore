@@ -3,6 +3,6 @@ build/
 .solution.json
 build.gradle
 .keep
-bob.iml
+*.iml
 .idea/
 out/
