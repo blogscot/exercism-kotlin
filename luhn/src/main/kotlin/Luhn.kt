@@ -7,8 +7,8 @@ object Luhn {
   }
 
   private fun calculateSum(numbers: String) =
-      numbers.reversed().withIndex().map { (index, number) ->
-        var num: Int = number.toInt() - '0'.toInt()
+      numbers.reversed().mapIndexed { index, digit ->
+        var num: Int = digit.toInt() - '0'.toInt()
 
         if (isOdd(index)) {
           num *= 2
