@@ -2,13 +2,17 @@ object Luhn {
 
   fun isValid(input: String): Boolean {
     val sanitised = input.filter { !it.isWhitespace() }
-    if (sanitised.length <= 1 || sanitised.any { !it.isDigit() }) return false
-    return calculateSum(sanitised) % 10 == 0
+
+    return when {
+      sanitised.length <= 1 -> false
+      sanitised.any { !it.isDigit() } -> false
+      else -> calculateSum(sanitised) % 10 == 0
+    }
   }
 
   private fun calculateSum(numbers: String) =
       numbers.reversed().mapIndexed { index, digit ->
-        var num: Int = digit.toInt() - '0'.toInt()
+        var num: Int = digit.toString().toInt()
 
         if (isOdd(index)) {
           num *= 2
