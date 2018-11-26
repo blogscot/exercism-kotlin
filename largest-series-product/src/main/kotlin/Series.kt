@@ -1,19 +1,16 @@
 class Series(private val input: String) {
 
   init {
-    require(input.all { it.isDigit() }) { "Illegal argument: $input" }
+    require(input.all { it.isDigit() })
   }
 
-  fun getLargestProduct(num: Int): Int? {
-    require(num >= 0 && input.length >= num) { "Illegal Argument: $num" }
+  fun getLargestProduct(num: Int): Int {
+    require(input.length >= num)
 
-    if (input.isBlank() && num == 0) return 1
+    if (num == 0) return 1
 
-    return input.withIndex()
-        .map { (index, _) -> input.drop(index).take(num) }
-        .filter { it.length == num }
-        .map { it.toList().map { it.toString().toInt() } }
-        .map { it.fold(1) { acc, i -> acc * i } }
-        .max()
+    return input.windowed(num, 1) {
+      it.fold(1) {acc, chr -> acc * chr.toString().toInt()}
+    }.max() ?: 0
   }
 }
