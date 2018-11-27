@@ -6,8 +6,6 @@ class SpaceAge(seconds: Long) {
 
   private val earthRotations = seconds / EARTH_PERIOD
 
-  constructor(seconds: Int): this(seconds.toLong())
-
   fun onEarth() = earthRotations.round()
   fun onMercury() = (earthRotations / 0.2408467).round()
   fun onVenus() = (earthRotations / 0.61519726).round()
