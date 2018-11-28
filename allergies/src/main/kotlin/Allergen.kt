@@ -17,7 +17,6 @@ class Allergies(private val score: Int) {
 
   fun getList() =
       Allergen.values()
-          .asList()
           .filter { (it.score and score) == it.score }
 
 }
