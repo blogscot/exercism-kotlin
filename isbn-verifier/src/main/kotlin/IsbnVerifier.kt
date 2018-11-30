@@ -12,12 +12,13 @@ class IsbnVerifier {
     }
   }
 
-  private fun String.processDigits(endsWithX: Boolean): Boolean {
-    var total = if (endsWithX) 10 else 0
-
-    val zipped = map { it.toString().toInt() }.zip(10 downTo 0)
-    total += zipped.map { (x, y) -> x * y }.sum()
-
-    return total % 11 == 0
-  }
+  private fun String.processDigits(endsWithX: Boolean): Boolean =
+      map { Character.getNumericValue(it) }
+          .zip(10 downTo 0)
+          .map { (x, y) -> x * y }
+          .sum()
+          .let {
+            val total = if (endsWithX) it + 10 else it
+            total % 11 == 0
+          }
 }
