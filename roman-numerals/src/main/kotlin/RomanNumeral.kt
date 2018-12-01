@@ -1,6 +1,6 @@
 import java.lang.StringBuilder
 
-val numerals = arrayListOf(
+val ENCODINGS = arrayListOf(
     1000 to "M",
     900 to "CM",
     500 to "D",
@@ -18,14 +18,14 @@ val numerals = arrayListOf(
 
 object RomanNumeral {
 
-  fun value(arabic: Int): String {
-    var current = arabic
+  fun value(value: Int): String {
+    var current = value
     val sb = StringBuilder()
 
-    for (pair in numerals) {
-      while (current >= pair.first) {
-        sb.append(pair.second)
-        current -= pair.first
+    for ((arabic, roman) in ENCODINGS) {
+      while (current >= arabic) {
+        sb.append(roman)
+        current -= arabic
       }
     }
     return sb.toString()
