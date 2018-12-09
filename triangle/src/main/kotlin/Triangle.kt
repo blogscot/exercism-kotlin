@@ -9,20 +9,14 @@ class Triangle<T>(side1: T, side2: T, side3: T)
   private val c = results[2]
 
   init {
-    val (x, y, z) = listOf(a.toFloat(), b.toFloat(), c.toFloat())
+    val (x, y, z) = listOf(a.toDouble(), b.toDouble(), c.toDouble())
     if ((x <= 0) or (y <= 0) or (z <= 0) or (x + y < z)) {
       throw IllegalArgumentException()
     }
   }
 
-  val isEquilateral
-    get() = (a == b) and (a == c)
-
-  val isIsosceles: Boolean
-    get() = (a == b) or (b == c)
-
-  val isScalene
-    get() = (a != b) and (b != c)
+  val isEquilateral = (a == b) and (b == c)
+  val isIsosceles = (a == b) or (b == c)
+  val isScalene = (a != b) and (b != c)
 
 }
-
