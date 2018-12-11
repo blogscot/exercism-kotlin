@@ -1,6 +1,6 @@
 object Atbash {
 
-  private val mapping = ('a'..'z').zip('z' downTo 'a')
+  private val mapping = ('a'..'z').zip('z' downTo 'a').toMap()
 
   fun encode(text: String) =
       text
@@ -17,6 +17,5 @@ object Atbash {
           .joinToString("")
 
   private fun translate(chr: Char) =
-      if (chr.isDigit()) chr
-      else mapping.find { it.first == chr }?.second
+      if (chr.isDigit()) chr else mapping[chr]
 }
