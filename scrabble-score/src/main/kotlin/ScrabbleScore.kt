@@ -1,23 +1,17 @@
 object ScrabbleScore {
 
-  private val ENCODING = arrayListOf(
-      "AEIOULNRST" to 1,
-      "DG" to 2,
-      "BCMP" to 3,
-      "FHVWY" to 4,
-      "K" to 5,
-      "JX" to 8,
-      "QZ" to 10
-  )
-
   fun scoreWord(word: String): Int =
       word.map(::findScore).sum()
 
-  private fun findScore(letter: Char): Int {
-    for ((group, score) in ENCODING) {
-      if (letter.toUpperCase() in group) return score
-    }
-    return 0
-  }
-
+  private fun findScore(letter: Char) =
+      when (letter.toUpperCase()) {
+        in "AEIOULNRST" -> 1
+        in "DG" -> 2
+        in "BCMP" -> 3
+        in "FHVWY" -> 4
+        in "K" -> 5
+        in "JX" -> 8
+        in "QZ" -> 10
+        else -> 0
+      }
 }
