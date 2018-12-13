@@ -14,8 +14,8 @@ object ScrabbleScore {
       word.map(::findScore).sum()
 
   private fun findScore(letter: Char): Int {
-    for (entry in ENCODING) {
-      if (letter.toUpperCase() in entry.first) return entry.second
+    for ((group, score) in ENCODING) {
+      if (letter.toUpperCase() in group) return score
     }
     return 0
   }
