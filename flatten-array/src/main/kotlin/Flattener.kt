@@ -1,17 +1,14 @@
 object Flattener {
 
   fun flatten(input: Collection<Any?>): List<Int> {
-    val output = mutableListOf<Int>()
-
-    for (element in input.filterNotNull()) {
+    return input.filterNotNull().flatMap {element ->
       when (element) {
         is Collection<*> ->
-          for (item in flatten(element.filterIsInstance<Any>())) output.add(item)
+          flatten(element.filterIsInstance<Any>())
         else -> {
-          output.add(element as Int)
+          listOf(element as Int)
         }
       }
     }
-    return output
   }
 }
