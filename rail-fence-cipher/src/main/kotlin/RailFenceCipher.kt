@@ -9,8 +9,7 @@ class RailFenceCipher(private val num: Int) {
 
   fun getDecryptedData(text: String): String {
 
-    val decoding = numbers.zip(getEncoding(text)
-        .asSequence())
+    val decoding = numbers.zip(getEncoding(text).asSequence())
         .sortedBy { it.second }
         .map { it.first }
 
@@ -35,11 +34,7 @@ private fun cycle(max: Int): Sequence<Int> =
 
       while (true) {
 
-        if ((output == max) and (step == 1) ||
-            (output == 0) and (step == -1)
-        ) {
-          step *= -1
-        }
+        if (output == max || (output == 0) and (step == -1)) step *= -1
 
         yield(output)
         output += step
