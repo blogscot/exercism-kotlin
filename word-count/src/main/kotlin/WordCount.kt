@@ -3,10 +3,8 @@ object WordCount {
 
   fun phrase(text: String) =
 
-      regex.findAll(text).map {
-        it.value.toLowerCase()
-      }.groupBy { it }
-          .map { (key, value) ->
-            Pair(key, value.size)
-          }.toMap()
+      regex.findAll(text)
+          .map { it.value.toLowerCase() }
+          .groupBy { it }
+          .mapValues { it.value.size }
 }
