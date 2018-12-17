@@ -13,6 +13,7 @@ class Robot {
           (1..3).map { getRandomNumber() }.joinToString("")
 
   var name = getRobotName()
+    private set
 
   fun reset() {
     name = getRobotName()
