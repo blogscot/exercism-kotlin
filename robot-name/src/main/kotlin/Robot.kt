@@ -8,9 +8,16 @@ class Robot {
   private fun getRandomLetter() =
       ('A'..'Z').toList()[Random.nextInt(0, 26)]
 
-  private fun getRobotName() =
-      (1..2).map { getRandomLetter() }.joinToString("") +
+  private fun getRobotName(): String {
+    var robotName: String
+
+    do {
+      robotName = (1..2).map { getRandomLetter() }.joinToString("") +
           (1..3).map { getRandomNumber() }.joinToString("")
+    } while (robotName == name)
+
+    return robotName
+  }
 
   var name = getRobotName()
     private set
