@@ -14,10 +14,9 @@ object SpiralMatrix {
     val up = { row-- }
     val down = { row++ }
 
-    val move = { action: () -> Int, totalMoves: Int ->
-      var count = totalMoves
+    val move = { action: () -> Int, numMoves: Int ->
 
-      while (count-- > 0) {
+      repeat(numMoves) {
         action()
         matrix[row][col] = num++
       }
