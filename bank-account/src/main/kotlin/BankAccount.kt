@@ -1,6 +1,3 @@
-import java.lang.IllegalStateException
-import java.nio.file.OpenOption
-
 enum class AccountStatus {
   Open,
   Closed
@@ -9,25 +6,23 @@ enum class AccountStatus {
 class BankAccount {
 
   var balance = 0
+    private set
     get() {
-      validateAccount()
+      check(status == AccountStatus.Open)
       return field
     }
 
   private var status = AccountStatus.Open
 
-  @Synchronized
   fun adjustBalance(amount: Int) {
-    validateAccount()
-    balance += amount
+    check(status == AccountStatus.Open)
+
+    synchronized(this) {
+      balance += amount
+    }
   }
 
   fun close() {
     status = AccountStatus.Closed
   }
-
-  private fun validateAccount() {
-    if (status == AccountStatus.Closed) throw IllegalStateException()
-  }
-
 }
