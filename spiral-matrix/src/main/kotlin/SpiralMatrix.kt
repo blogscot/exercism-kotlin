@@ -22,7 +22,7 @@ object SpiralMatrix {
       }
     }
 
-    while (num <= (size * size)) {
+    repeat(size * size) {
       move(right, moves)
       move(down, --moves)
       move(left, moves)
