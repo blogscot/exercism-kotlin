@@ -1,9 +1,8 @@
-typealias Grades = MutableMap<Int, List<String>>
-
 class School {
-  private val grades: Grades = mutableMapOf()
 
-  fun db(): Grades = grades
+  private val grades = mutableMapOf<Int, List<String>>()
+
+  fun db(): MutableMap<Int, List<String>> = grades
 
   fun add(student: String, grade: Int) {
     val students = grades[grade]?.toMutableList() ?: mutableListOf()
@@ -13,7 +12,7 @@ class School {
 
   fun grade(num: Int) = grades[num] ?: emptyList()
 
-  fun sort(): Grades =
+  fun sort(): MutableMap<Int, List<String>> =
       grades.map { (key, students) ->
         Pair(key, students.sorted())
       }.toMap().toSortedMap().toMutableMap()
