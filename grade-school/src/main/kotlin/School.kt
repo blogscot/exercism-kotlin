@@ -1,19 +1,18 @@
 class School {
 
-  private val grades = mutableMapOf<Int, List<String>>()
+  private val db = mutableMapOf<Int, List<String>>()
 
-  fun db() = grades
+  fun db() = db
 
   fun add(student: String, grade: Int) {
-    val students = grades[grade]?.toMutableList() ?: mutableListOf()
-    students.add(student)
-    grades[grade] = students
+    val students = db.getOrDefault(grade, emptyList())
+    db[grade] = students + student
   }
 
-  fun grade(num: Int) = grades[num] ?: emptyList()
+  fun grade(year: Int) = db.getOrDefault(year, emptyList())
 
   fun sort() =
-      grades.map { (key, students) ->
+      db.map { (key, students) ->
         Pair(key, students.sorted())
       }.toMap().toSortedMap()
 }
