@@ -5,41 +5,31 @@ class Deque<T> {
   var head: Node<T>? = null
   var tail: Node<T>? = null
 
-  fun push(entry: T) {
-    if (head == null) {
-      val newNode = Node(entry)
-      head = newNode
-      tail = newNode
-    } else {
-      // push entry onto end
-      val newNode = Node(entry, previous = tail)
-      tail?.next = newNode
-      tail = newNode
-    }
+  fun push(entry: T) = tail.let { old ->
+    tail = Node(entry, previous = old)
+    old?.next = tail
+
+    if (head == null) head = tail
   }
 
-  fun pop(): T? {
-    val data = tail?.data
-    tail = tail?.previous
-    return data
+  fun pop(): T? = tail?.let { old ->
+    if (head == old) head = null
+    tail = old.previous
+    tail?.next = null
+    return old.data
   }
 
-  fun shift(): T? {
-    val data = head?.data
-    head = head?.next
-    return data
+  fun shift(): T? = head?.let { old ->
+    if (tail == old) tail = null
+    head = old.next
+    head?.previous = null
+    old.data
   }
 
-  fun unshift(entry: T) {
-    if (head == null) {
-      val newNode = Node(entry)
-      head = newNode
-      tail = newNode
-    } else {
-      // push entry onto start
-      val newNode = Node(entry, next = head)
-      head?.previous = newNode
-      head = newNode
-    }
+  fun unshift(entry: T) = head.let { old ->
+    head = Node(entry, next = old)
+    old?.previous = head
+
+    if (tail == null) tail = head
   }
 }
