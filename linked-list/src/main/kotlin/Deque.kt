@@ -16,7 +16,7 @@ class Deque<T> {
     if (head == old) head = null
     tail = old.previous
     tail?.next = null
-    return old.data
+    old.data
   }
 
   fun shift(): T? = head?.let { old ->
