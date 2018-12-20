@@ -3,21 +3,11 @@ class Robot(
     var orientation: Orientation = Orientation.NORTH) {
 
   fun turnRight() {
-    orientation = when (orientation) {
-      Orientation.NORTH -> Orientation.EAST
-      Orientation.EAST -> Orientation.SOUTH
-      Orientation.SOUTH -> Orientation.WEST
-      Orientation.WEST -> Orientation.NORTH
-    }
+    orientation = orientation.turnRight()
   }
 
   fun turnLeft() {
-    orientation = when (orientation) {
-      Orientation.NORTH -> Orientation.WEST
-      Orientation.WEST -> Orientation.SOUTH
-      Orientation.SOUTH -> Orientation.EAST
-      Orientation.EAST -> Orientation.NORTH
-    }
+    orientation = orientation.turnLeft()
   }
 
   fun advance() {
@@ -30,7 +20,7 @@ class Robot(
   }
 
   fun simulate(commands: String) {
-    for (command in commands) {
+    commands.forEach { command ->
       when (command) {
         'R' -> turnRight()
         'L' -> turnLeft()
@@ -39,6 +29,5 @@ class Robot(
         }
       }
     }
-
   }
 }
