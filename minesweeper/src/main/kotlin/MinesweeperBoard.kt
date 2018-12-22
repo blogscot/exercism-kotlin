@@ -9,7 +9,7 @@ class MinesweeperBoard(private val board: List<String>) {
   )
 
   fun withNumbers(): List<String> =
-      board.withIndex().map { (rowIndex, x) ->
+      board.mapIndexed { rowIndex, x ->
         x.withIndex().joinToString("") { (colIndex, square) ->
           if (square != '*') {
             val neighbours = calculateNeighbours(Position(rowIndex, colIndex))
