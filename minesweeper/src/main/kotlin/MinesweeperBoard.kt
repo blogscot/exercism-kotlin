@@ -21,7 +21,7 @@ class MinesweeperBoard(private val board: List<String>) {
   private fun calculateNeighbours(pos: Position): Int =
       neighbours
           .map { (x, y) -> Pair(pos.x + x, pos.y + y) }
-          .filter { (x, y) -> 0 <= x && x < board.size && 0 <= y && y < board[0].length }
+          .filter { (x, y) -> x in 0 until board.size && y in 0 until board[0].length }
           .fold(0) { acc, (x, y) ->
             if (board[x][y] == '*') acc + 1 else acc
           }
