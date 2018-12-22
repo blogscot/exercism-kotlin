@@ -23,9 +23,9 @@ class BaseConverter(private val base: Int, private val digits: IntArray) {
     while (total > 0) {
       val remainder = total % newBase
       total = (total - remainder) / newBase
-      output.add(remainder)
+      output.add(0, remainder)
     }
 
-    return if (output.isEmpty()) intArrayOf(0) else output.reversed().toIntArray()
+    return if (output.isEmpty()) intArrayOf(0) else output.toIntArray()
   }
 }
