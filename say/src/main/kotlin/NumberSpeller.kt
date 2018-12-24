@@ -46,15 +46,17 @@ class NumberSpeller {
   fun say(number: Long): String {
     require(number >= 0) { "Input must be non-negative" }
     require(number < oneTrillion) { "Input must be less than 1000000000000" }
-
     if (number == 0L) return "zero"
+    return sayHelper(number)
+  }
 
+  private fun sayHelper(number: Long): String {
     val sb = StringBuffer()
     var num = number
 
     fun update(amount: Long, units: String): Long {
       var num1 = num
-      sb.append("${say(num1 / amount)} $units ")
+      sb.append("${sayHelper(num1 / amount)} $units ")
       num1 %= amount
       return num1
     }
