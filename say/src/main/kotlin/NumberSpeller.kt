@@ -4,7 +4,6 @@ class NumberSpeller {
   private val oneBillion = 1_000_000_000L
   private val oneMillion = 1_000_000L
 
-
   private val numbers = arrayListOf(
       1L to "one",
       2L to "two",
@@ -53,30 +52,26 @@ class NumberSpeller {
     val sb = StringBuffer()
     var num = number
 
+    fun update(amount: Long, units: String): Long {
+      var num1 = num
+      sb.append("${say(num1 / amount)} $units ")
+      num1 %= amount
+      return num1
+    }
+
     for ((decimal, word) in numbers) {
 
       if (num >= decimal) {
-        when {
-          num >= oneBillion -> {
-            sb.append("${say(num / oneBillion)} billion ")
-            num %= oneBillion
-          }
-          num >= oneMillion -> {
-            sb.append("${say(num / oneMillion)} million ")
-            num %= oneMillion
-          }
-          num >= 1000 -> {
-            sb.append("${say(num / 1000)} thousand ")
-            num %= 1000
-          }
-          num >= 100 -> {
-            sb.append("${say(num / 100)} hundred ")
-            num %= 100
-          }
+        num = when {
+          num >= oneBillion -> update(oneBillion, "billion")
+          num >= oneMillion -> update(oneMillion, "million")
+          num >= 1000 -> update(1000, "thousand")
+          num >= 100 -> update(100, "hundred")
           else -> {
             sb.append(word)
             if (num > 20 && num % 10 > 0) sb.append('-')
             num -= decimal
+            num
           }
         }
       }
