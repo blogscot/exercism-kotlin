@@ -1,5 +1,10 @@
 class NumberSpeller {
 
+  private val oneTrillion = 1_000_000_000_000L
+  private val oneBillion = 1_000_000_000L
+  private val oneMillion = 1_000_000L
+
+
   private val numbers = arrayListOf(
       1L to "one",
       2L to "two",
@@ -30,8 +35,8 @@ class NumberSpeller {
       90L to "ninety",
       100L to "hundred",
       1000L to "thousand",
-      1_000_000L to "million",
-      1_000_000_000L to "billion"
+      oneMillion to "million",
+      oneBillion to "billion"
   ).reversed()
 
   fun say(number: Int): String {
@@ -41,7 +46,7 @@ class NumberSpeller {
 
   fun say(number: Long): String {
     require(number >= 0) { "Input must be non-negative" }
-    require(number < 1_000_000_000_000) { "Input must be less than 1000000000000" }
+    require(number < oneTrillion) { "Input must be less than 1000000000000" }
 
     if (number == 0L) return "zero"
 
@@ -51,26 +56,26 @@ class NumberSpeller {
     for ((decimal, word) in numbers) {
 
       if (num >= decimal) {
-        when (num) {
-          in 1_000_000_000..999_999_999_999 -> {
-            sb.append("${say(num / 1_000_000_000)} billion ")
-            num %= 1_000_000_000
+        when {
+          num >= oneBillion -> {
+            sb.append("${say(num / oneBillion)} billion ")
+            num %= oneBillion
           }
-          in 1_000_000..999_999_999 -> {
-            sb.append("${say(num / 1_000_000)} million ")
-            num %= 1_000_000
+          num >= oneMillion -> {
+            sb.append("${say(num / oneMillion)} million ")
+            num %= oneMillion
           }
-          in 1000..999_999 -> {
+          num >= 1000 -> {
             sb.append("${say(num / 1000)} thousand ")
             num %= 1000
           }
-          in 100..999 -> {
+          num >= 100 -> {
             sb.append("${say(num / 100)} hundred ")
             num %= 100
           }
           else -> {
             sb.append(word)
-            if (num in 20..99 && num % 10 > 0) sb.append('-')
+            if (num > 20 && num % 10 > 0) sb.append('-')
             num -= decimal
           }
         }
