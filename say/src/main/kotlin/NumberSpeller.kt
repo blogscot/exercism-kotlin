@@ -40,6 +40,7 @@ class NumberSpeller {
   }
 
   fun say(number: Long): String {
+    require(number >= 0) { "Input must be non-negative" }
     require(number < 1_000_000_000_000) { "Input must be less than 1000000000000" }
 
     if (number == 0L) return "zero"
@@ -73,10 +74,8 @@ class NumberSpeller {
             num -= decimal
           }
         }
-
       }
     }
     return sb.toString().trimEnd()
-
   }
 }
