@@ -30,16 +30,9 @@ fun <T, U> List<U>.customFoldLeft(initial: T, block: (T, U) -> T): T {
   return result
 }
 
-fun <T, U> List<U>.customFoldRight(initial: T, block: (U, T) -> T): T {
-  var result = initial
-  this.customReverse().forEach { elem ->
-    result = block(elem, result)
-  }
-  return result
-}
+fun <T, U> List<U>.customFoldRight(initial: T, block: (U, T) -> T): T =
+  this.customReverse().customFoldLeft(initial) {acc, elem -> block(elem, acc)}
+
 
 fun <T> List<T>.customReverse(): List<T> =
-    if (this.isEmpty())
-      this
-    else
-      this.subList(1, this.customSize).customReverse() + this.take(1)
+    this.customFoldLeft(listOf()) {acc, elem -> listOf(elem) + acc}
