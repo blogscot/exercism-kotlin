@@ -17,10 +17,10 @@ val <T> List<T>.customSize
   get() = this.customFoldLeft(0) { acc, _ -> acc + 1 }
 
 fun <T, U> List<T>.customMap(block: (T) -> U): List<U> =
-  this.customFoldLeft(mutableListOf()) {acc, elem ->
-    acc.add(block(elem))
-    acc
-  }
+    this.customFoldLeft(mutableListOf()) { acc, elem ->
+      acc.add(block(elem))
+      acc
+    }
 
 fun <T, U> List<U>.customFoldLeft(initial: T, block: (T, U) -> T): T {
   var result = initial
@@ -31,8 +31,8 @@ fun <T, U> List<U>.customFoldLeft(initial: T, block: (T, U) -> T): T {
 }
 
 fun <T, U> List<U>.customFoldRight(initial: T, block: (U, T) -> T): T =
-  this.customReverse().customFoldLeft(initial) {acc, elem -> block(elem, acc)}
+    this.customReverse().customFoldLeft(initial) { acc, elem -> block(elem, acc) }
 
 
 fun <T> List<T>.customReverse(): List<T> =
-    this.customFoldLeft(listOf()) {acc, elem -> listOf(elem) + acc}
+    this.customFoldLeft(listOf()) { acc, elem -> listOf(elem) + acc }
