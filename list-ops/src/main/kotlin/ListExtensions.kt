@@ -16,11 +16,11 @@ fun <T> List<T>.customFilter(block: (T) -> Boolean): List<T> =
 val <T> List<T>.customSize
   get() = this.customFoldLeft(0) { acc, _ -> acc + 1 }
 
-fun <T, U> List<T>.customMap(block: (T) -> U): List<U> {
-  val output = mutableListOf<U>()
-  this.forEach { output.add(block(it)) }
-  return output
-}
+fun <T, U> List<T>.customMap(block: (T) -> U): List<U> =
+  this.customFoldLeft(mutableListOf()) {acc, elem ->
+    acc.add(block(elem))
+    acc
+  }
 
 fun <T, U> List<U>.customFoldLeft(initial: T, block: (T, U) -> T): T {
   var result = initial
