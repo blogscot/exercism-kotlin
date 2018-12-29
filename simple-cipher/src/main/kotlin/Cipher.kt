@@ -10,18 +10,18 @@ class Cipher() {
   }
 
   fun encode(text: String): String {
-    return encode(text, using = key)
+    return encode(text, key)
   }
 
   fun decode(text: String): String {
-    return decode(text, using = key)
+    return decode(text, key)
   }
 
-  private fun encode(text: String, using: String) =
-      text.zip(using).map { (a, b) -> encode(a, b) }.joinToString("")
+  private fun encode(text: String, key: String) =
+      text.zip(key).map { (a, b) -> encode(a, b) }.joinToString("")
 
-  private fun encode(letter: Char, using: Char): Char {
-    val distance = using - 'a'
+  private fun encode(letter: Char, keyLetter: Char): Char {
+    val distance = keyLetter - 'a'
     val newLetter = letter + distance
     return when {
       newLetter > 'z' -> (newLetter - 'z' + 'a'.toInt() - 1).toChar()
@@ -29,11 +29,11 @@ class Cipher() {
     }
   }
 
-  fun decode(text: String, using: String) =
-      text.zip(using).map { (a, b) -> decode(a, b) }.joinToString("")
+  private fun decode(text: String, key: String) =
+      text.zip(key).map { (a, b) -> decode(a, b) }.joinToString("")
 
-  fun decode(letter: Char, using: Char): Char {
-    val distance = using - 'a'
+  private fun decode(letter: Char, keyLetter: Char): Char {
+    val distance = keyLetter - 'a'
     val newLetter = letter - distance
     return when {
       newLetter < 'a' -> newLetter + 'z'.toInt() - 'a'.toInt() + 1
