@@ -9,13 +9,10 @@ class Cipher() {
     key = cipherKey
   }
 
-  fun encode(text: String): String {
-    return encode(text, key)
-  }
 
-  fun decode(text: String): String {
-    return decode(text, key)
-  }
+  fun encode(text: String): String = encode(text, key)
+  fun decode(text: String): String = decode(text, key)
+
 
   private fun encode(text: String, key: String) =
       text.zip(key).map { (a, b) -> encode(a, b) }.joinToString("")
