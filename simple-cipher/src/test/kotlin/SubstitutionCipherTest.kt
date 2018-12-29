@@ -4,18 +4,18 @@ import kotlin.test.assertEquals
 
 class SubstitutionCipherTest {
 
-    private val KEY = "abcdefghij"
+    private val key = "abcdefghij"
     private lateinit var cipher: Cipher
 
     @Before
     fun setup() {
-        this.cipher = Cipher(KEY)
+        this.cipher = Cipher(key)
     }
 
 
     @Test
     fun cipherKeepsTheSubmittedKey() {
-        assertEquals(KEY, cipher.key)
+        assertEquals(key, cipher.key)
     }
 
     @Test

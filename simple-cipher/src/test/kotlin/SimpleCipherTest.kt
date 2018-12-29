@@ -7,5 +7,4 @@ import org.junit.runners.Suite
         IncorrectKeyCipherTest::class,
         SubstitutionCipherTest::class
 )
-class SimpleCipherTest {
-}
+class SimpleCipherTest

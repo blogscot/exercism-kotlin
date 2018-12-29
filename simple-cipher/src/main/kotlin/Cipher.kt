@@ -1,6 +1,6 @@
 import kotlin.random.Random
 
-class Cipher(var key: String = generateRandomKey()) {
+class Cipher(val key: String = generateRandomKey()) {
 
   init {
     require(key.all { it.isLowerCase() } && key.none { it.isDigit() } && key.isNotEmpty())
