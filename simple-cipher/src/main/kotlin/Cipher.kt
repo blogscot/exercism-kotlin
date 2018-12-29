@@ -1,18 +1,13 @@
 import kotlin.random.Random
 
-class Cipher() {
-  var key = generateRandomKey()
-    private set
+class Cipher(var key: String = generateRandomKey()) {
 
-  constructor(cipherKey: String) : this() {
-    require(cipherKey.all { it.isLowerCase() } && cipherKey.none { it.isDigit() } && cipherKey.isNotEmpty())
-    key = cipherKey
+  init {
+    require(key.all { it.isLowerCase() } && key.none { it.isDigit() } && key.isNotEmpty())
   }
-
 
   fun encode(text: String): String = encode(text, key)
   fun decode(text: String): String = decode(text, key)
-
 
   private fun encode(text: String, key: String) =
       text.zip(key).map { (a, b) -> encode(a, b) }.joinToString("")
@@ -21,7 +16,7 @@ class Cipher() {
     val distance = keyLetter - 'a'
     val newLetter = letter + distance
     return when {
-      newLetter > 'z' -> (newLetter - 'z' + 'a'.toInt() - 1).toChar()
+      newLetter > 'z' -> newLetter - 'z'.toInt() + 'a'.toInt() - 1
       else -> newLetter
     }
   }
@@ -37,10 +32,10 @@ class Cipher() {
       else -> newLetter
     }
   }
-
-  private fun generateRandomKey(): String =
-      generateSequence { getRandomLetter() }.take(100).joinToString("")
-
-  private fun getRandomLetter() =
-      ('a'..'z').toList()[Random.nextInt(0, 26)]
 }
+
+private fun generateRandomKey(): String =
+    generateSequence { getRandomLetter() }.take(100).joinToString("")
+
+private fun getRandomLetter() =
+    ('a'..'z').toList()[Random.nextInt(0, 26)]
