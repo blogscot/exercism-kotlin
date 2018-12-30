@@ -9,13 +9,13 @@ data class ComplexNumber(val real: Double = 0.0, val imag: Double = 0.0) {
   operator fun times(other: ComplexNumber) =
       ComplexNumber(real * other.real - imag * other.imag, real * other.imag + other.real * imag)
 
-  operator fun div(other: ComplexNumber): ComplexNumber {
-    val divisor = other.real * other.real + other.imag * other.imag
-    return ComplexNumber(
-        (real * other.real + imag * other.imag) / divisor,
-        (imag * other.real - real * other.imag) / divisor
-    )
-  }
+  operator fun div(other: ComplexNumber) =
+      (other.real * other.real + other.imag * other.imag).let { divisor ->
+        ComplexNumber(
+            (real * other.real + imag * other.imag) / divisor,
+            (imag * other.real - real * other.imag) / divisor
+        )
+      }
 
   val abs: Double = Math.sqrt((real * real) + (imag * imag))
 
