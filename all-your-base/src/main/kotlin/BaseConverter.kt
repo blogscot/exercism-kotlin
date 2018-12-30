@@ -13,17 +13,12 @@ class BaseConverter(private val base: Int, private val digits: IntArray) {
   fun convertToBase(newBase: Int): IntArray {
     require(newBase > 1) { "Bases must be at least 2." }
 
-    var total: Int
+    var total = digits.fold(0) { acc, value -> acc * base + value }
     val output = mutableListOf<Int>()
 
-    total = digits.reversed().mapIndexed { index, num ->
-      num * Math.pow(base.toDouble(), index.toDouble()).toInt()
-    }.sum()
-
     while (total > 0) {
-      val remainder = total % newBase
-      total = (total - remainder) / newBase
-      output.add(0, remainder)
+      output.add(0, total % newBase)
+      total /= newBase
     }
 
     return if (output.isEmpty()) intArrayOf(0) else output.toIntArray()
