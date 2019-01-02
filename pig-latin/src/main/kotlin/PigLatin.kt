@@ -1,4 +1,4 @@
-package PigLatin
+package pigLatin
 
 fun translate(text: String): String =
     text.split(" ").joinToString(" ") { translateWord(it) }

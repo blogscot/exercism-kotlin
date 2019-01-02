@@ -4,7 +4,7 @@ import org.junit.runners.Parameterized
 import kotlin.test.assertEquals
 
 @RunWith(Parameterized::class)
-class PigLatinTest(val input: String, val expectedOutput: String) {
+class PigLatinTest(private val input: String, private val expectedOutput: String) {
 
     companion object {
         @JvmStatic
@@ -66,7 +66,7 @@ class PigLatinTest(val input: String, val expectedOutput: String) {
 
     @Test
     fun test() {
-        assertEquals(expectedOutput, PigLatin.translate(input))
+        assertEquals(expectedOutput, pigLatin.translate(input))
     }
 
 }
